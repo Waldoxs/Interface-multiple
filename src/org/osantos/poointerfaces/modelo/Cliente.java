@@ -1,5 +1,7 @@
 package org.osantos.poointerfaces.modelo;
 
+import java.util.Objects;
+
 public class Cliente {
     private Integer id;
     private String nombre;
@@ -41,11 +43,19 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-
     @Override
     public String toString() {
         return "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'';
     }
+
+    //Es el metodo que usa el .remove
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(id, cliente.id);
+    }
+
 }
