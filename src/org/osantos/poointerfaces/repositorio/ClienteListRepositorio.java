@@ -1,9 +1,7 @@
 package org.osantos.poointerfaces.repositorio;
 
 import org.osantos.poointerfaces.modelo.Cliente;
-
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class ClienteListRepositorio implements CrudRepositorio, OrdenableRepositorio, PaginableRespositorio {
@@ -25,10 +23,10 @@ public class ClienteListRepositorio implements CrudRepositorio, OrdenableReposit
     public Cliente porId(Integer id) {
         Cliente resultado = null;
         for (Cliente client : dataSource) {
-            if (client.getId().equals(id)) {
+            if(client.getId() != null && client.getId().equals(id)){
                 resultado = client;
+                break;
             }
-            break;
         }
 
         return resultado;
