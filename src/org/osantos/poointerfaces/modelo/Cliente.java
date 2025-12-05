@@ -4,11 +4,15 @@ public class Cliente {
     private Integer id;
     private String nombre;
     private String apellido;
+    private static int ultimoId;
+
 
     public Cliente() {
+        this.id = ++ultimoId;
     }
 
     public Cliente(String nombre, String apellido) {
+        this();
         this.nombre = nombre;
         this.apellido = apellido;
     }
@@ -35,5 +39,13 @@ public class Cliente {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+
+    @Override
+    public String toString() {
+        return "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'';
     }
 }
