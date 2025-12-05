@@ -3,6 +3,7 @@ package org.osantos.poointerfaces.repositorio;
 import org.osantos.poointerfaces.modelo.Cliente;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class ClienteListRepositorio implements CrudRepositorio, OrdenableRepositorio, PaginableRespositorio {
@@ -53,11 +54,30 @@ public class ClienteListRepositorio implements CrudRepositorio, OrdenableReposit
 
     @Override
     public List<Cliente> listar(String campo, Direccion dir) {
-        return List.of();
+        //Se usa la expresión lambda y se asume que es de tipo Cliente
+        this.dataSource.sort((a, b) -> {
+                    int resultado = 0;
+                    if (dir == Direccion.ASC) {
+                        switch (campo) {
+                            case "id" -> resultado = a.getId().compareTo(b.getId());
+                            case "nombre" -> resultado = a.getNombre().compareTo(b.getNombre());
+                            case "apellido" -> resultado = a.getApellido().compareTo(b.getApellido());
+                        }
+                    } else if (dir == Direccion.DESC) {
+                        switch (campo) {
+                            case "id" -> resultado = b.getId().compareTo(a.getId());
+                            case "nombre" -> resultado = b.getNombre().compareTo(a.getNombre());
+                            case "apellido" -> resultado = b.getApellido().compareTo(a.getApellido());
+                        }
+                    }
+                    return resultado;
+                }
+        );
+        return this.dataSource;
     }
 
     @Override
     public List<Cliente> listar(int desde, int hasta) {
-        return List.of();
+        return this.dataSource.subList(desde,hasta);
     }
 }
