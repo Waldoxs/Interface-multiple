@@ -3,10 +3,9 @@ package org.osantos.poointerfaces.repositorio;
 import org.osantos.poointerfaces.modelo.Cliente;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
-public class ClienteListRepositorio implements CrudRepositorio, OrdenableRepositorio, PaginableRespositorio {
+public class ClienteListRepositorio implements OrdenablePaginableCrudRepositorio {
 
     //Atributo DataSource
     private List<Cliente> dataSource;
@@ -86,6 +85,10 @@ public class ClienteListRepositorio implements CrudRepositorio, OrdenableReposit
         return resultado;
     }
 
+    @Override
+    public int total() {
+        return this.dataSource.size();
+    }
 }
 
 
