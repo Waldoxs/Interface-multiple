@@ -1,7 +1,9 @@
 package org.osantos.poointerfaces.repositorio;
 
 import org.osantos.poointerfaces.modelo.Cliente;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class ClienteListRepositorio implements CrudRepositorio, OrdenableRepositorio, PaginableRespositorio {
@@ -23,7 +25,7 @@ public class ClienteListRepositorio implements CrudRepositorio, OrdenableReposit
     public Cliente porId(Integer id) {
         Cliente resultado = null;
         for (Cliente client : dataSource) {
-            if(client.getId() != null && client.getId().equals(id)){
+            if (client.getId() != null && client.getId().equals(id)) {
                 resultado = client;
                 break;
             }
@@ -52,30 +54,41 @@ public class ClienteListRepositorio implements CrudRepositorio, OrdenableReposit
 
     @Override
     public List<Cliente> listar(String campo, Direccion dir) {
+        //Retorna una nueva lista inmutable
+        List<Cliente> listaOrdenada = new ArrayList<>(this.dataSource);
+
         //Se usa la expresión lambda y se asume que es de tipo Cliente
-        this.dataSource.sort((a, b) -> {
-                    int resultado = 0;
-                    if (dir == Direccion.ASC) {
-                        switch (campo) {
-                            case "id" -> resultado = a.getId().compareTo(b.getId());
-                            case "nombre" -> resultado = a.getNombre().compareTo(b.getNombre());
-                            case "apellido" -> resultado = a.getApellido().compareTo(b.getApellido());
-                        }
-                    } else if (dir == Direccion.DESC) {
-                        switch (campo) {
-                            case "id" -> resultado = b.getId().compareTo(a.getId());
-                            case "nombre" -> resultado = b.getNombre().compareTo(a.getNombre());
-                            case "apellido" -> resultado = b.getApellido().compareTo(a.getApellido());
-                        }
-                    }
-                    return resultado;
-                }
-        );
-        return this.dataSource;
+        listaOrdenada.sort((a, b) -> {
+            int resultado = 0;
+            if (dir == Direccion.ASC) {
+                resultado = ordenar(campo, a, b);
+            } else if (dir == Direccion.DESC) {
+                resultado = ordenar(campo, b, a);
+            }
+            return resultado;
+        });
+        return listaOrdenada;
     }
+
 
     @Override
     public List<Cliente> listar(int desde, int hasta) {
-        return this.dataSource.subList(desde,hasta);
+        return this.dataSource.subList(desde, hasta);
     }
+
+    public static int ordenar(String campo, Cliente a, Cliente b) {
+        int resultado = 0;
+        switch (campo) {
+            case "id" -> resultado = a.getId().compareTo(b.getId());
+            case "nombre" -> resultado = a.getNombre().compareTo(b.getNombre());
+            case "apellido" -> resultado = a.getApellido().compareTo(b.getApellido());
+        }
+        return resultado;
+    }
+
 }
+
+
+
+
+

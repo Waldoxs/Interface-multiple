@@ -24,7 +24,7 @@ public class EjemploRepositorio {
         }
 
         System.out.println("======= Ordenable =======");
-        List<Cliente> clientesOrdenASC = ((OrdenableRepositorio) repo).listar("apellido", Direccion.ASC);
+        List<Cliente> clientesOrdenASC = ((OrdenableRepositorio) repo).listar("nombre", Direccion.DESC);
         for (Cliente ordenAsc : clientesOrdenASC) {
             System.out.println(ordenAsc);
         }

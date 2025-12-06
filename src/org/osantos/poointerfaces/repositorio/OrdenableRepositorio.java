@@ -8,4 +8,7 @@ public interface OrdenableRepositorio {
 
     //Metodo para ordenar
     List<Cliente> listar(String campo, Direccion dir);
+
+
+
 }
