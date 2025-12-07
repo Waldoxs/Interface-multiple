@@ -1,9 +1,11 @@
 package org.osantos.poointerfaces.repositorio;
 
+import org.osantos.poointerfaces.modelo.BaseEntidad;
+
 import java.util.ArrayList;
 import java.util.List;
 
-abstract public class AbstractaListRepositorio<T>
+abstract public class AbstractaListRepositorio<T extends BaseEntidad>
         implements OrdenablePaginableCrudRepositorio<T> {
 
     //Atributo DataSource
@@ -19,17 +21,17 @@ abstract public class AbstractaListRepositorio<T>
         return this.dataSource;
     }
 
-//    @Override
-//    public T porId(Integer id) {
-//        T resultado = null;
-//        for(T cli: dataSource){
-//            if(cli.getId() != null && cli.getId().equals(id)){
-//                resultado = cli;
-//                break;
-//            }
-//        }
-//        return resultado;
-//    }
+    @Override
+    public T porId(Integer id) {
+        T resultado = null;
+        for(T client: dataSource){
+            if(client.getId() != null && client.getId().equals(id)){
+                resultado = client;
+                break;
+            }
+        }
+        return resultado;
+    }
 
     @Override
     public void crear(T t) {
