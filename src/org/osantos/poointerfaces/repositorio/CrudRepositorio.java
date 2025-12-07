@@ -5,17 +5,17 @@ import org.osantos.poointerfaces.modelo.Cliente;
 import java.util.List;
 
 //Alta y bajas de modificaciones
-public interface CrudRepositorio {
+public interface CrudRepositorio<T> {
 
     //Metodo de la interfaz
-    List<Cliente> listar();
+    List<T> listar();
 
     //Para el metodo gett para obtener el id
-    Cliente porId(Integer id);
+    T porId(Integer id);
 
     //Metodo para realizar una operación
-    void crear(Cliente cliente);
-    void editar(Cliente cliente);
+    void crear(T cliente);
+    void editar(T cliente);
     void eliminar(Integer id);
 
 

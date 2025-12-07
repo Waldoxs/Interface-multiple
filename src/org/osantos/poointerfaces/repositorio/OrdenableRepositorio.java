@@ -1,13 +1,11 @@
 package org.osantos.poointerfaces.repositorio;
 
-import org.osantos.poointerfaces.modelo.Cliente;
-
 import java.util.List;
 
-public interface OrdenableRepositorio {
+public interface OrdenableRepositorio<T> {
 
     //Metodo para ordenar
-    List<Cliente> listar(String campo, Direccion dir);
+    List<T> listar(String campo, Direccion dir);
 
 
 

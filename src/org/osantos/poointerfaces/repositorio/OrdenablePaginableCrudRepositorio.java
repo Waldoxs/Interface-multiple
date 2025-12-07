@@ -1,5 +1,5 @@
 package org.osantos.poointerfaces.repositorio;
 
-public interface OrdenablePaginableCrudRepositorio extends OrdenableRepositorio, PaginableRespositorio, CrudRepositorio, ContableRepositorio {
+public interface OrdenablePaginableCrudRepositorio<T> extends OrdenableRepositorio<T>, PaginableRespositorio<T>, CrudRepositorio<T>, ContableRepositorio {
 
 }

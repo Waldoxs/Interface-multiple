@@ -5,20 +5,7 @@ import org.osantos.poointerfaces.modelo.Cliente;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteListRepositorio implements OrdenablePaginableCrudRepositorio {
-
-    //Atributo DataSource
-    private List<Cliente> dataSource;
-
-    //Para inicializar la lista
-    public ClienteListRepositorio() {
-        this.dataSource = new ArrayList<>();
-    }
-
-    @Override
-    public List<Cliente> listar() {
-        return this.dataSource;
-    }
+ public class ClienteListRepositorio extends AbstractaListRepositorio<Cliente>  {
 
     @Override
     public Cliente porId(Integer id) {
@@ -29,13 +16,7 @@ public class ClienteListRepositorio implements OrdenablePaginableCrudRepositorio
                 break;
             }
         }
-
         return resultado;
-    }
-
-    @Override
-    public void crear(Cliente cliente) {
-        this.dataSource.add(cliente);
     }
 
     @Override
@@ -43,12 +24,6 @@ public class ClienteListRepositorio implements OrdenablePaginableCrudRepositorio
         Cliente client = this.porId(cliente.getId());
         client.setNombre(cliente.getNombre());
         client.setApellido(cliente.getApellido());
-    }
-
-    @Override
-    public void eliminar(Integer id) {
-        Cliente client = this.porId(id);
-        this.dataSource.remove(client);
     }
 
     @Override
@@ -70,11 +45,6 @@ public class ClienteListRepositorio implements OrdenablePaginableCrudRepositorio
     }
 
 
-    @Override
-    public List<Cliente> listar(int desde, int hasta) {
-        return this.dataSource.subList(desde, hasta);
-    }
-
     public static int ordenar(String campo, Cliente a, Cliente b) {
         int resultado = 0;
         switch (campo) {
@@ -85,10 +55,6 @@ public class ClienteListRepositorio implements OrdenablePaginableCrudRepositorio
         return resultado;
     }
 
-    @Override
-    public int total() {
-        return this.dataSource.size();
-    }
 }
 
 

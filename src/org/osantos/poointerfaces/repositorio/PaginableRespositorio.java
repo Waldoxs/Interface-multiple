@@ -1,10 +1,8 @@
 package org.osantos.poointerfaces.repositorio;
 
-import org.osantos.poointerfaces.modelo.Cliente;
-
 import java.util.List;
 
-public interface PaginableRespositorio {
+public interface PaginableRespositorio<T> {
     //Sobrecarga de metodo
-    List<Cliente> listar (int desde, int hasta);
+    List<T> listar (int desde, int hasta);
 }
