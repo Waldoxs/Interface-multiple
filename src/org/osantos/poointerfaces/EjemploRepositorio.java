@@ -2,6 +2,7 @@ package org.osantos.poointerfaces;
 
 import org.osantos.poointerfaces.modelo.Cliente;
 import org.osantos.poointerfaces.repositorio.*;
+import org.osantos.poointerfaces.repositorio.lista.ClienteListRepositorio;
 
 import java.util.List;
 

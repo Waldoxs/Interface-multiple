@@ -1,11 +1,13 @@
-package org.osantos.poointerfaces.repositorio;
+package org.osantos.poointerfaces.repositorio.lista;
 
 import org.osantos.poointerfaces.modelo.Cliente;
+import org.osantos.poointerfaces.repositorio.AbstractaListRepositorio;
+import org.osantos.poointerfaces.repositorio.Direccion;
 
 import java.util.ArrayList;
 import java.util.List;
 
- public class ClienteListRepositorio extends AbstractaListRepositorio<Cliente>  {
+ public class ClienteListRepositorio extends AbstractaListRepositorio<Cliente> {
 
     @Override
     public void editar(Cliente cliente) {

@@ -14,8 +14,8 @@ public interface CrudRepositorio<T> {
     T porId(Integer id);
 
     //Metodo para realizar una operación
-    void crear(T cliente);
-    void editar(T cliente);
+    void crear(T obj);
+    void editar(T obj);
     void eliminar(Integer id);
 
 
