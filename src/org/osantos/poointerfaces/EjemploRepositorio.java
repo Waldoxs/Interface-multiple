@@ -5,6 +5,7 @@ import org.osantos.poointerfaces.repositorio.*;
 import org.osantos.poointerfaces.repositorio.excepciones.AccesoDatoException;
 import org.osantos.poointerfaces.repositorio.excepciones.EscrituraAccesoDatoException;
 import org.osantos.poointerfaces.repositorio.excepciones.LecturaAccesoDatoException;
+import org.osantos.poointerfaces.repositorio.excepciones.RegistroDuplicadoAccesoDatoException;
 import org.osantos.poointerfaces.repositorio.lista.ClienteListRepositorio;
 
 import java.util.List;
@@ -17,8 +18,11 @@ public class EjemploRepositorio {
             repo.crear(new Cliente("Jano", "Pérez"));
             repo.crear(new Cliente("Oswaldo", "Santos"));
             repo.crear(new Cliente("Luci", "Martínez"));
-            repo.crear(new Cliente("Andrés", "Guzmán"));
-            repo.crear(null);
+
+            Cliente andres = new Cliente("Andrés", "Guzmán");
+            repo.crear(andres);
+            repo.crear(andres);
+
 
             List<Cliente> clientes = repo.listar();
             for (Cliente client : clientes) {
@@ -40,7 +44,7 @@ public class EjemploRepositorio {
             Cliente clientActulizar = new Cliente("Oswaldo", "Hernandez");
             clientActulizar.setId(2);
             repo.editar(clientActulizar);
-            Cliente bea = repo.porId(20);
+            Cliente bea = repo.porId(2);
             System.out.println(bea);
 
 
@@ -52,7 +56,12 @@ public class EjemploRepositorio {
             System.out.println("======= Total  de registros =======");
             System.out.println(repo.total());
 
-        } catch (LecturaAccesoDatoException e) {
+        }
+        catch (RegistroDuplicadoAccesoDatoException e) {
+            System.out.println("Registro duplicado: " + e.getMessage());
+            e.printStackTrace(System.out);
+        }
+        catch (LecturaAccesoDatoException e) {
             System.out.println("Lectura: " + e.getMessage());
             e.printStackTrace(System.out);
         }

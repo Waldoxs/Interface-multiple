@@ -1,8 +1,7 @@
 package org.osantos.poointerfaces.repositorio;
 
 import org.osantos.poointerfaces.modelo.BaseEntidad;
-import org.osantos.poointerfaces.repositorio.excepciones.EscrituraAccesoDatoException;
-import org.osantos.poointerfaces.repositorio.excepciones.LecturaAccesoDatoException;
+import org.osantos.poointerfaces.repositorio.excepciones.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,7 @@ abstract public class AbstractaListRepositorio<T extends BaseEntidad>
     }
 
     @Override
-    public T porId(Integer id) throws LecturaAccesoDatoException{
+    public T porId(Integer id) throws LecturaAccesoDatoException {
         if (id == null || id <= 0) {
             throw new LecturaAccesoDatoException("id invalido debe ser mayor a cero");
         }
@@ -38,7 +37,7 @@ abstract public class AbstractaListRepositorio<T extends BaseEntidad>
             }
         }
 
-        if(resultado == null){
+        if (resultado == null) {
             throw new LecturaAccesoDatoException("No existe el registro con id: " + id);
         }
 
@@ -48,10 +47,15 @@ abstract public class AbstractaListRepositorio<T extends BaseEntidad>
 
     @Override
     public void crear(T t) throws EscrituraAccesoDatoException {
-        if(t == null){
+        if (t == null) {
             throw new EscrituraAccesoDatoException("Error al insertar un objeto null");
         }
+        if (this.dataSource.contains(t)) {
+            throw new RegistroDuplicadoAccesoDatoException("Error el objeto con id: "
+                    + t.getId() + " existe en el repositorio");
+        }
         this.dataSource.add(t);
+
     }
 
     @Override
