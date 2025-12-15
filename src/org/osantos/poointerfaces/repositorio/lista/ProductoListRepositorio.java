@@ -1,16 +1,16 @@
 package org.osantos.poointerfaces.repositorio.lista;
 
-import org.osantos.poointerfaces.modelo.Cliente;
 import org.osantos.poointerfaces.modelo.Producto;
 import org.osantos.poointerfaces.repositorio.AbstractaListRepositorio;
 import org.osantos.poointerfaces.repositorio.Direccion;
+import org.osantos.poointerfaces.repositorio.excepciones.LecturaAccesoDatoException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductoListRepositorio extends AbstractaListRepositorio<Producto> {
     @Override
-    public void editar(Producto producto) {
+    public void editar(Producto producto) throws LecturaAccesoDatoException {
         Producto p = porId(producto.getId());
         p.setDescripcion(producto.getDescripcion());
         p.setPrecio(producto.getPrecio());

@@ -3,6 +3,7 @@ package org.osantos.poointerfaces.repositorio.lista;
 import org.osantos.poointerfaces.modelo.Cliente;
 import org.osantos.poointerfaces.repositorio.AbstractaListRepositorio;
 import org.osantos.poointerfaces.repositorio.Direccion;
+import org.osantos.poointerfaces.repositorio.excepciones.LecturaAccesoDatoException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  public class ClienteListRepositorio extends AbstractaListRepositorio<Cliente> {
 
     @Override
-    public void editar(Cliente cliente) {
+    public void editar(Cliente cliente) throws LecturaAccesoDatoException {
         Cliente client = this.porId(cliente.getId());
         client.setNombre(cliente.getNombre());
         client.setApellido(cliente.getApellido());

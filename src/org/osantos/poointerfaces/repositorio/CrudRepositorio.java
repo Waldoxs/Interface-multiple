@@ -1,6 +1,8 @@
 package org.osantos.poointerfaces.repositorio;
 
-import org.osantos.poointerfaces.modelo.Cliente;
+import org.osantos.poointerfaces.repositorio.excepciones.AccesoDatoException;
+import org.osantos.poointerfaces.repositorio.excepciones.EscrituraAccesoDatoException;
+import org.osantos.poointerfaces.repositorio.excepciones.LecturaAccesoDatoException;
 
 import java.util.List;
 
@@ -10,13 +12,13 @@ public interface CrudRepositorio<T> {
     //Metodo de la interfaz
     List<T> listar();
 
-    //Para el metodo gett para obtener el id
-    T porId(Integer id);
+    //Para el metodo get para obtener el id
+    T porId(Integer id) throws AccesoDatoException;
 
     //Metodo para realizar una operación
-    void crear(T obj);
-    void editar(T obj);
-    void eliminar(Integer id);
+    void crear(T obj) throws EscrituraAccesoDatoException;
+    void editar(T obj) throws AccesoDatoException;
+    void eliminar(Integer id) throws AccesoDatoException;
 
 
 }
